@@ -18,14 +18,6 @@
 }
 
 /* Header */
-.cruxdata-header {
-    background-color: #4b77be;
-    color: #fff;
-    padding: 20px 30px;
-    border-bottom: 1px solid #3a5b8c;
-}
-
-
 .cruxdata-header .period {
     margin-top: 10px;
     font-style: italic;
