@@ -108,7 +108,7 @@ if ($helper->hasCruxData()): ?>
         <?php endforeach; ?>
     </div>
 </fieldset>
-<?php elseif (empty($helper->getApiKey())): ?>
+<?php elseif (empty($helper->getApiKey()) && !$helper->getCustomApiEndpoint()): ?>
 <div class="cruxdata-content">
     <div class="cruxdata-card">
         <h3><?php echo $this->__('API Key Required') ?></h3>
