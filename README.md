@@ -2,6 +2,8 @@
 
 An OpenMage extension that integrates Chrome User Experience Report (CrUX) data into the admin backend.
 
+![demo](https://github.com/user-attachments/assets/bbb3ca18-cb3e-4ab8-b171-ae0a8dfef8fe)
+
 ## Features
 
 - Display Core Web Vitals data (LCP, INP, CLS, FCP) from Chrome User Experience Report
