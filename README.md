@@ -21,7 +21,7 @@ An OpenMage extension that integrates Chrome User Experience Report (CrUX) data 
 ### Composer
 
 ```bash
-composer require mm/openmage-gruxdata
+composer require mm/openmage-cruxdata
 ```
 
 ### Modman
