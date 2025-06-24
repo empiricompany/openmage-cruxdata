@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <report>
+            <children>
+                <mm_cruxdata translate="title" module="mm_cruxdata">
+                    <title>CrUX Data Report</title>
+                    <action>adminhtml/cruxdata/index</action>
+                    <sort_order>100</sort_order>
+                </mm_cruxdata>
+            </children>
+        </report>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <report>
+                        <children>
+                            <mm_cruxdata translate="title" module="mm_cruxdata">
+                                <title>CrUX Data Report</title>
+                            </mm_cruxdata>
+                        </children>
+                    </report>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mm_cruxdata translate="title" module="mm_cruxdata">
+                                        <title>CrUX Data</title>
+                                    </mm_cruxdata>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

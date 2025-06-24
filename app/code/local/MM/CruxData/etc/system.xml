@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mm_cruxdata translate="label" module="mm_cruxdata">
+            <label>CrUX Data</label>
+            <tab>advanced</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>450</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <custom_api_endpoint translate="label comment">
+                            <label>Custom API Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Optional. Enter base domain only (e.g., https://your-worker.workers.dev). Default: https://chromeuxreport.googleapis.com</comment>
+                        </custom_api_endpoint>
+                        <api_key translate="label comment">
+                            <label>API Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Enter your Google API key with CrUX API access enabled. Not needed if using a custom endpoint.</comment>
+                        </api_key>
+                    </fields>
+                </general>
+            </groups>
+        </mm_cruxdata>
+    </sections>
+</config>

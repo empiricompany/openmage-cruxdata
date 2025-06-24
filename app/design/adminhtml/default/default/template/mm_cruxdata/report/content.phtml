@@ -1,0 +1,140 @@
+<?php
+/**
+ * CrUX Data Report Content Template
+ *
+ * @see MM_CruxData_Block_Adminhtml_Report_Content
+ * @var MM_CruxData_Block_Adminhtml_Report_Content $this
+ */
+
+$helper = $this->getCruxHelper();
+$origin = $helper->getOrigin();
+
+$helper->fetchData();
+if ($helper->hasCruxData()): ?>
+    
+    <?php    
+    $_defaultFormFactors = [
+        CruxData_Metrics::FORM_FACTOR_PHONE,
+        CruxData_Metrics::FORM_FACTOR_TABLET,
+        CruxData_Metrics::FORM_FACTOR_DESKTOP
+    ];
+    $formFactorDistributionPercentages = $helper->formFactorDistributionPercentages($_defaultFormFactors);
+    ?>
+<fieldset>
+    <p><?php echo $this->__('View performance data for your website collected by Chrome') ?></p>
+    <?php if (!empty($origin)): ?>
+    <p><?php echo $this->__('View detailed metrics on CrUX Vis:') ?> <a href="https://cruxvis.withgoogle.com/#/?view=cwvsummary&url=<?php echo urlencode($origin); ?>&identifier=origin&device=ALL" target="_blank">CrUX Vis Report</a></p>
+    <?php endif; ?>
+    <?php $period = $helper->getCollectionPeriod(); ?>
+    <?php if (!empty($period)): ?>
+    <p class="period"><?php echo $this->__('Data collection period:') ?> <?php echo $this->escapeHtml($period) ?></p>
+    <?php endif; ?>
+
+    <div class="cruxdata-content">
+        <?php
+        foreach ($_defaultFormFactors as $formFactorCode):
+            $distribution = $formFactorDistributionPercentages[$formFactorCode] > 0 ? $formFactorDistributionPercentages[$formFactorCode] : 0;
+            if ($distribution == 0) {
+                continue;
+            }
+        ?>
+        <div class="cruxdata-card" data-device="<?php echo strtolower($formFactorCode) ?>">
+            <h3><?php echo $helper->getFormFactorTitle($formFactorCode) ?>
+            <?php if ($distribution > 0): ?>
+                <div class="device-usage">
+                    Usage: <?php echo $distribution ?>%
+                </div>
+            </h3>
+            <?php endif; ?>
+
+            <?php 
+            $metrics = $helper->getMetrics(
+                [
+                    CruxData_Metrics::METRIC_LCP,
+                    CruxData_Metrics::METRIC_FCP,
+                    CruxData_Metrics::METRIC_CLS,
+                    CruxData_Metrics::METRIC_INP
+                ],
+                array($formFactorCode)
+            );
+            if ($metrics): 
+            ?>
+            <div class="cruxdata-metrics">
+                <?php foreach ($metrics as $metricCode => $metricValue): ?>
+                
+                <div class="metric-item">
+                    <div class="metric-title">
+                        <?php echo $helper->getMetricTitle($metricCode) ?>
+                    </div>
+                    <div class="metric-value <?php echo $helper->getMetricRating($metricCode, $metricValue) ?>">
+                        <?php echo $helper->getMetricValueFormatted($metricCode, $metricValue) ?>
+                    </div>
+                    <div class="metric-description">
+                        <?php echo $helper->getMetricDescription($metricCode) ?>
+                    </div>
+                    <?php
+                    $densities = $helper->getMetricHistogramFormatted($formFactorCode, $metricCode);
+                    if ($densities):
+                    ?>
+                    <div class="metric-histogram">
+                        <div class="histogram-title"><?php echo $this->__('Distribution:') ?></div>
+                        <div class="histogram-bars">
+                            <div class="histogram-bin" style="max-width: <?php echo $densities['good']; ?>%;">
+                                <div class="bin-bar">
+                                    <div class="bin-fill good"><?php echo round($densities['good'], 1) ?>%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="histogram-bin" style="max-width: <?php echo $densities['moderate']; ?>%;">
+                                <div class="bin-bar">
+                                    <div class="bin-fill moderate"><?php echo round($densities['moderate'], 1) ?>%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="histogram-bin" style="max-width: <?php echo $densities['poor']; ?>%;">
+                                <div class="bin-bar">
+                                    <div class="bin-fill poor"><?php echo round($densities['poor'], 1) ?>%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</fieldset>
+<?php elseif (empty($helper->getApiKey())): ?>
+<div class="cruxdata-content">
+    <div class="cruxdata-card">
+        <h3><?php echo $this->__('API Key Required') ?></h3>
+        <div class="cruxdata-message">
+            <p><?php echo $this->__('To view Chrome User Experience Report data, you need to configure a Google API key.') ?></p>
+            <p><?php echo $this->__('Please go to System > Configuration > CrUX Data > General Settings to set up your API key.') ?></p>
+        </div>
+    </div>
+</div>
+<?php elseif (empty($origin)): ?>
+<div class="cruxdata-content">
+    <div class="cruxdata-card">
+        <h3><?php echo $this->__('Enter Website URL') ?></h3>
+        <div class="cruxdata-message">
+            <p><?php echo $this->__('Please enter a website URL in the form above and click "View Metrics" to see Chrome User Experience Report data.') ?></p>
+        </div>
+    </div>
+</div>
+<?php else: ?>
+<div class="cruxdata-content">
+    <div class="cruxdata-card">
+        <h3><?php echo $this->__('No Data Available') ?></h3>
+        <div class="cruxdata-message">
+            <p><?php echo $this->__('No Chrome User Experience Report data is available for the specified URL.') ?></p>
+            <p><?php echo $this->__('Please try a different URL or check that the URL is correct.') ?></p>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

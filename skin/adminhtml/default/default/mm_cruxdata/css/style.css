@@ -1,0 +1,232 @@
+/**
+ * CrUX Data Report Styles
+ */
+
+/* Search Form */
+
+.cruxdata-message {
+    padding: 15px;
+    line-height: 1.5;
+}
+
+/* Container principale */
+.cruxdata-container {
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header */
+.cruxdata-header {
+    background-color: #4b77be;
+    color: #fff;
+    padding: 20px 30px;
+    border-bottom: 1px solid #3a5b8c;
+}
+
+
+.cruxdata-header .period {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* Main Content */
+.cruxdata-content {
+    padding-block: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    --crux-good: #0ccf6b;
+    --crux-moderate: #ffa401;
+    --crux-poor: #eb0c00;
+}
+
+/* Card */
+.cruxdata-card {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.cruxdata-card h3 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cruxdata-card h3::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.cruxdata-card[data-device="phone"] h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'%3E%3C/path%3E%3Cpath d='M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z'%3E%3C/path%3E%3C/svg%3E");
+}
+.cruxdata-card[data-device="tablet"] h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'%3E%3C/path%3E%3Cpath d='M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z'%3E%3C/path%3E%3C/svg%3E");
+}
+.cruxdata-card[data-device="desktop"] h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'%3E%3C/path%3E%3Cpath d='M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Metriche */
+.cruxdata-metrics {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.metric-item {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    flex-grow: 1;
+}
+
+.metric-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.metric-value.good {
+    color: var(--crux-good);
+}
+
+.metric-value.moderate {
+    color: var(--crux-moderate);
+}
+
+.metric-value.poor {
+    color: var(--crux-poor);
+}
+
+.metric-description {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Historgram */
+.metric-histogram {
+    margin-top: 15px;
+}
+
+.histogram-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.histogram-bars {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    height: 30px;
+    margin-top: 5px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+@keyframes barGrow {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.histogram-bin .bin-fill {
+    animation: barGrow 0.8s ease-out forwards;
+    transform-origin: left;
+}
+
+.histogram-bin {
+    min-width: 26px;
+    flex-grow: 1;
+}
+
+.bin-bar {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.bin-fill {
+    height: 100%;
+    background-color: #4b77be;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 2px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.bin-fill.empty {
+    background-color: transparent;
+    color: #666;
+    border: 1px dashed #ccc;
+    box-sizing: border-box;
+}
+
+.bin-fill.good {
+    background-color: var(--crux-good);
+}
+
+.bin-fill.moderate {
+    background-color: var(--crux-moderate);
+}
+
+.bin-fill.poor {
+    background-color: var(--crux-poor);
+}
+
+.device-usage {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    background: #f9f9f9;
+    padding-inline: 8px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Footer */
+.cruxdata-footer {
+    padding: 15px 30px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}

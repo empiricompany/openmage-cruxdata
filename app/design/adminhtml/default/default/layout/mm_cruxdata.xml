@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_cruxdata_index>
+        <update handle="cruxdata_assets"/>
+        <reference name="content">
+            <block type="mm_cruxdata/adminhtml_report" name="mm_cruxdata_report">
+                <block type="mm_cruxdata/adminhtml_report_content" name="mm_cruxdata_report_content" />
+            </block>
+        </reference>
+    </adminhtml_cruxdata_index>
+
+    <adminhtml_cruxdata_search>
+        <update handle="cruxdata_assets"/>
+        <reference name="content">
+            <block type="mm_cruxdata/adminhtml_report" name="mm_cruxdata_report">
+                <block type="mm_cruxdata/adminhtml_report_content" name="mm_cruxdata_report_content" />
+            </block>
+        </reference>
+    </adminhtml_cruxdata_search>
+
+    <cruxdata_assets>
+        <reference name="head">
+            <action method="addCss"><stylesheet>mm_cruxdata/css/style.css</stylesheet></action>
+        </reference>
+    </cruxdata_assets>
+</layout>

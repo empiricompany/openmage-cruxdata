@@ -1,0 +1,6 @@
+app/etc/modules/MM_CruxData.xml app/etc/modules/MM_CruxData.xml
+app/code/local/MM/CruxData app/code/local/MM/CruxData
+app/design/adminhtml/default/default/layout/mm_cruxdata.xml app/design/adminhtml/default/default/layout/mm_cruxdata.xml
+app/design/adminhtml/default/default/template/mm_cruxdata app/design/adminhtml/default/default/template/mm_cruxdata
+skin/adminhtml/default/default/mm_cruxdata skin/adminhtml/default/default/mm_cruxdata
+lib/CruxData lib/CruxData

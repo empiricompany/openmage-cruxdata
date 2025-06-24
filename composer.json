@@ -1,0 +1,10 @@
+{
+    "name": "mm/openmage-gruxdata",
+    "description": "View CrUX (Chrome User Experience Report) collection data",
+    "type": "magento-module",
+    "license": "MIT",
+    "version": "0.1.0",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

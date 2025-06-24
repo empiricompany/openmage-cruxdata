@@ -1,0 +1,87 @@
+<?php
+/**
+ * CrUX Data Report Template
+ *
+ * @see MM_CruxData_Block_Adminhtml_Report
+ * @var $this MM_CruxData_Block_Adminhtml_Report
+ */
+
+$helper = $this->getCruxHelper();
+$apiKey = $helper->getApiKey() || !empty($helper->getCustomApiEndpoint());
+$origin = $helper->getOrigin();
+?>
+<div class="content-header">
+    <h3 class="icon-head head-report"><?php echo $this->getHeaderText() ?></h3>
+</div>
+<?php if (empty($apiKey)): ?>
+<div class="messages">
+    <div class="error-msg">
+        <ul>
+            <li><span><?php echo $this->__('API key is not set. Please configure your Google API key in System > Configuration > CrUX Data > General Settings.') ?></span></li>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Filter'); ?></h4>
+    </div>
+    <div class="fieldset">
+        <form action="<?php echo $this->getUrl('*/*/search') ?>" method="post" id="cruxdata_search_form">
+            <?php echo $this->getBlockHtml('formkey') ?>
+            <div class="hor-scroll">
+                <table class="form-list">
+                    <tr>
+                        <td class="label">
+                            <label for="origin"><?php echo $this->__('Website URL:') ?></label>
+                        </td>
+                        <td class="value">
+                            <input type="text" name="origin" id="origin" value="<?php echo $this->escapeHtml($origin) ?>" class="input-text" placeholder="https://example.com" />
+                            <p class="note"><?php echo $this->__('Enter the full URL of the website you want to analyze.') ?></p>
+                            <?php
+                            $websites = Mage::app()->getWebsites();
+                            $options = array();
+                            foreach ($websites as $website) {
+                                $secureUrl = $website->getConfig('web/secure/base_url');
+                                if ($secureUrl) {
+                                    echo '<div class="note">' . $this->escapeHtml($secureUrl) . ' <a href="#" onclick="document.getElementById(\'origin\').value=\'' . $this->escapeHtml($secureUrl) . '\'; return false;">' . $this->__('Use this URL') . '</a></div>';
+                                }
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                </table>
+                
+                <button type="submit" class="scalable" title="<?php echo $this->__('View Metrics') ?>">
+                    <span><span><span><?php echo $this->__('View Metrics') ?></span></span></span>
+                </button>
+            
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="cruxdata-container entry-edit">
+    <div class="cruxdata-header entry-edit-head">
+        <h4><?php echo $this->__('Chrome User Experience Report') ?></h4>
+    </div>
+    
+    <?php echo $this->getChildHtml('mm_cruxdata_report_content') ?>
+    
+    <div class="cruxdata-footer">
+        <p>
+            <?php if (empty($apiKey)): ?>
+                <?php echo $this->__('Configure your API key to view Chrome User Experience Report data.') ?>
+            <?php elseif (empty($origin)): ?>
+                <?php echo $this->__('Enter a website URL to view Chrome User Experience Report data.') ?>
+            <?php else: ?>
+                <?php echo $this->__('Data is provided by the Chrome User Experience Report API.') ?>
+            <?php endif; ?>
+        </p>
+        <p><?php echo $this->__('For more information about Core Web Vitals, visit') ?> <a href="https://web.dev/vitals/" target="_blank">web.dev/vitals</a></p>
+        <?php if (!empty($origin)): ?>
+        <p><?php echo $this->__('View detailed metrics on CrUX Vis:') ?> <a href="https://cruxvis.withgoogle.com/#/?view=cwvsummary&url=<?php echo urlencode($origin); ?>&identifier=origin&device=ALL" target="_blank">CrUX Vis Report</a></p>
+        <?php endif; ?>
+    </div>
+</div>

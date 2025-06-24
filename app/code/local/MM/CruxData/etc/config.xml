@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MM_CruxData>
+            <version>0.1.0</version>
+        </MM_CruxData>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <MM_CruxData before="Mage_Adminhtml">MM_CruxData_Adminhtml</MM_CruxData>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <mm_cruxdata>
+                    <file>mm_cruxdata.xml</file>
+                </mm_cruxdata>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <blocks>
+            <mm_cruxdata>
+                <class>MM_CruxData_Block</class>
+            </mm_cruxdata>
+        </blocks>
+        <helpers>
+            <mm_cruxdata>
+                <class>MM_CruxData_Helper</class>
+            </mm_cruxdata>
+        </helpers>
+    </global>
+    
+    <default>
+        <mm_cruxdata>
+            <general>
+                <api_key></api_key>
+            </general>
+        </mm_cruxdata>
+    </default>
+</config>
