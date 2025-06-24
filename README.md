@@ -2,7 +2,8 @@
 
 An OpenMage extension that integrates Chrome User Experience Report (CrUX) data into the admin backend.
 
-![demo](https://github.com/user-attachments/assets/bbb3ca18-cb3e-4ab8-b171-ae0a8dfef8fe)
+![demo](https://github.com/user-attachments/assets/9fe7d503-3f76-4f3b-9e4b-3c2f15472525)
+
 
 ## Features
 
